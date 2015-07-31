@@ -47,7 +47,7 @@ class GetMessageData implements SelfHandling
         $data['form']   = $this->builder->getFormPresenter();
         $data['fields'] = $decorator->decorate($this->builder->getFormFields());
 
-        $data['message']['subject'] = $parser->parse(
+        $data['subject'] = $parser->parse(
             $this->builder->getOption('subject', 'Contact Request'),
             $this->builder->getFormValues()->all()
         );
