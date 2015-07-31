@@ -1,6 +1,7 @@
 <?php namespace Anomaly\ContactPlugin\Form\Command;
 
 use Anomaly\SettingsModule\Setting\SettingRepository;
+use Anomaly\Streams\Platform\Support\Parser;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Mail\Message;
@@ -33,7 +34,7 @@ class BuildMessage implements SelfHandling
     /**
      * Create a new BuildMessage instance.
      *
-     * @param Message     $message
+     * @param Message $message
      * @param FormBuilder $builder
      */
     public function __construct(Message $message, FormBuilder $builder)
@@ -47,7 +48,7 @@ class BuildMessage implements SelfHandling
      *
      * @param SettingRepository $settings
      */
-    public function handle(SettingRepository $settings)
+    public function handle(SettingRepository $settings, Parser $parser)
     {
         call_user_func_array(
             [$this->message, 'to'],
@@ -72,7 +73,10 @@ class BuildMessage implements SelfHandling
 
         call_user_func_array(
             [$this->message, 'subject'],
-            (array)$this->builder->getFormValue('subject', $this->builder->getOption('subject', 'Contact Request'))
+            (array)$parser->parse(
+                $this->builder->getOption('subject', 'Contact Request'),
+                $this->builder->getFormValues()->all()
+            )
         );
     }
 }
