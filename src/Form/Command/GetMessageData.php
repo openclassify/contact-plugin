@@ -2,6 +2,7 @@
 
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 use Illuminate\Contracts\Bus\SelfHandling;
+use Robbo\Presenter\Decorator;
 
 /**
  * Class GetMessageData
@@ -34,13 +35,15 @@ class GetMessageData implements SelfHandling
     /**
      * Handle the command.
      *
+     * @param Decorator $decorator
      * @return array
      */
-    public function handle()
+    public function handle(Decorator $decorator)
     {
         $data = [];
 
-        $data['form'] = $this->builder->getFormPresenter();
+        $data['form']   = $this->builder->getFormPresenter();
+        $data['fields'] = $decorator->decorate($this->builder->getFormFields());
 
         return $data;
     }

@@ -42,10 +42,10 @@ class ContactFormBuilder extends FormBuilder
             'required' => true,
             'config'   => [
                 'options' => [
-                    'support'  => 'Support',
-                    'sales'    => 'Sales',
-                    'feedback' => 'Feedback',
-                    'other'    => 'Other'
+                    'Support',
+                    'Sales',
+                    'Feedback',
+                    'Other'
                 ]
             ]
         ],

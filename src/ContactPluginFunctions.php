@@ -50,17 +50,6 @@ class ContactPluginFunctions
     public function form(array $parameters = [])
     {
         if (!$builder = array_get($parameters, 'builder')) {
-
-            if (!$model = array_get($parameters, 'model')) {
-
-                $stream    = ucfirst(camel_case(array_get($parameters, 'stream')));
-                $namespace = ucfirst(camel_case(array_get($parameters, 'namespace')));
-
-                $model = 'Anomaly\Streams\Platform\Model\\' . $namespace . '\\' . $namespace . $stream . 'EntryModel';
-
-                array_set($parameters, 'model', $model);
-            }
-
             $builder = 'Anomaly\ContactPlugin\Form\ContactFormBuilder';
         }
 
