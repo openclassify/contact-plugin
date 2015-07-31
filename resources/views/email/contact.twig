@@ -1,0 +1,8 @@
+<h3>Contact Request</h3>
+
+{% for field in form.fields %}
+    <strong>{{ field.label }}:</strong> {{ field.value }}
+    <br>
+{% endfor %}
+<br>
+Sent from {{ request_ip() }}

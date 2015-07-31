@@ -1,5 +1,9 @@
 <?php namespace Anomaly\ContactPlugin\Form;
 
+use Anomaly\Streams\Platform\Message\MessageBag;
+use Illuminate\Mail\Mailer;
+use Illuminate\Mail\Message;
+
 /**
  * Class ContactFormHandler
  *
@@ -16,8 +20,25 @@ class ContactFormHandler
      *
      * @param ContactFormBuilder $builder
      */
-    public function handle(ContactFormBuilder $builder)
+    public function handle(ContactFormBuilder $builder, MessageBag $messages, Mailer $mailer)
     {
-        dd($builder->getFormValues());
+        if (!$builder->hasFormErrors() && $mailer->send(
+                'anomaly.plugin.contact::email/contact',
+                ['form' => $builder->getFormPresenter()],
+                function (Message $message) {
+
+                    $message->to('ryan@pyrocms.com');
+                    $message->from('noreply@pyrocms.com');
+                    $message->subject('Testing');
+                }
+            )
+        ) {
+            $messages->success('Sent!');
+        } else {
+            $messages->error('Error');
+        }
+
+
+        $builder->resetForm();
     }
 }

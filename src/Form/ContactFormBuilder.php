@@ -19,9 +19,19 @@ class ContactFormBuilder extends FormBuilder
      * @var array
      */
     protected $fields = [
-        'name' => [
+        'name'    => [
             'label'    => 'Name',
             'type'     => 'anomaly.field_type.text',
+            'required' => true
+        ],
+        'email'   => [
+            'label'    => 'Email',
+            'type'     => 'anomaly.field_type.email',
+            'required' => true
+        ],
+        'message' => [
+            'label'    => 'Message',
+            'type'     => 'anomaly.field_type.textarea',
             'required' => true
         ]
     ];
@@ -32,7 +42,9 @@ class ContactFormBuilder extends FormBuilder
      * @var array
      */
     protected $actions = [
-        'submit'
+        'submit' => [
+            'redirect' => false
+        ]
     ];
 
     /**
