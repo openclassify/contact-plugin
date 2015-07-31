@@ -1,5 +1,6 @@
 <?php namespace Anomaly\ContactPlugin\Form\Command;
 
+use Anomaly\Streams\Platform\Support\Parser;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Robbo\Presenter\Decorator;
@@ -36,14 +37,20 @@ class GetMessageData implements SelfHandling
      * Handle the command.
      *
      * @param Decorator $decorator
+     * @param Parser    $parser
      * @return array
      */
-    public function handle(Decorator $decorator)
+    public function handle(Decorator $decorator, Parser $parser)
     {
         $data = [];
 
         $data['form']   = $this->builder->getFormPresenter();
         $data['fields'] = $decorator->decorate($this->builder->getFormFields());
+
+        $data['message']['subject'] = $parser->parse(
+            $this->builder->getOption('subject', 'Contact Request'),
+            $this->builder->getFormValues()->all()
+        );
 
         return $data;
     }
