@@ -1,6 +1,11 @@
 <?php namespace Anomaly\ContactPlugin\Form;
 
+use Anomaly\ContactPlugin\Form\Command\BuildMessage;
+use Anomaly\ContactPlugin\Form\Command\GetMessageData;
+use Anomaly\ContactPlugin\Form\Command\GetMessageView;
 use Anomaly\Streams\Platform\Message\MessageBag;
+use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Mail\Mailer;
 use Illuminate\Mail\Message;
 
@@ -12,33 +17,46 @@ use Illuminate\Mail\Message;
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\ContactPlugin\Form
  */
-class ContactFormHandler
+class ContactFormHandler implements SelfHandling
 {
+
+    use DispatchesJobs;
 
     /**
      * Handle the command.
      *
      * @param ContactFormBuilder $builder
+     * @param MessageBag         $messages
+     * @param Mailer             $mailer
      */
     public function handle(ContactFormBuilder $builder, MessageBag $messages, Mailer $mailer)
     {
-        if (!$builder->hasFormErrors() && $mailer->send(
-                'anomaly.plugin.contact::email/contact',
-                ['form' => $builder->getFormPresenter()],
-                function (Message $message) {
-
-                    $message->to('ryan@pyrocms.com');
-                    $message->from('noreply@pyrocms.com');
-                    $message->subject('Testing');
-                }
-            )
-        ) {
-            $messages->success('Sent!');
-        } else {
-            $messages->error('Error');
+        // Validation failed!
+        if ($builder->hasFormErrors()) {
+            return;
         }
 
+        // Delegate these for now.
+        $view = $this->dispatch(new GetMessageView($builder));
+        $data = $this->dispatch(new GetMessageData($builder));
 
+        // Build the message object.
+        $message = function (Message $message) use ($builder) {
+            $this->dispatch(new BuildMessage($message, $builder));
+        };
+
+        // Send the message and report.
+        if ($mailer->send($view, $data, $message)) {
+            $messages->success(
+                $builder->getFormOption('success_message', 'anomaly.plugin.contact::success.send_message')
+            );
+        } else {
+            $messages->error(
+                $builder->getFormOption('error_message', 'anomaly.plugin.contact::success.send_message')
+            );
+        }
+
+        // Clear the form!
         $builder->resetForm();
     }
 }

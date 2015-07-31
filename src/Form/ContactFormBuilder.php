@@ -14,6 +14,13 @@ class ContactFormBuilder extends FormBuilder
 {
 
     /**
+     * The form handler.
+     *
+     * @var ContactFormHandler
+     */
+    protected $handler = ContactFormHandler::class;
+
+    /**
      * The form fields.
      *
      * @var array
@@ -28,6 +35,19 @@ class ContactFormBuilder extends FormBuilder
             'label'    => 'Email',
             'type'     => 'anomaly.field_type.email',
             'required' => true
+        ],
+        'subject' => [
+            'label'    => 'Subject',
+            'type'     => 'anomaly.field_type.select',
+            'required' => true,
+            'config'   => [
+                'options' => [
+                    'support'  => 'Support',
+                    'sales'    => 'Sales',
+                    'feedback' => 'Feedback',
+                    'other'    => 'Other'
+                ]
+            ]
         ],
         'message' => [
             'label'    => 'Message',
