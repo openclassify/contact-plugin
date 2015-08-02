@@ -74,4 +74,13 @@ class ContactFormBuilder extends FormBuilder
      */
     protected $buttons = [];
 
+    /**
+     * The form options.
+     *
+     * @var array
+     */
+    protected $options = [
+        'breadcrumb' => false
+    ];
+
 }
