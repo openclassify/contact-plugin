@@ -52,7 +52,7 @@ class ContactFormHandler implements SelfHandling
             );
         } else {
             $messages->error(
-                $builder->getFormOption('error_message', 'anomaly.plugin.contact::success.send_message')
+                $builder->getFormOption('error_message', 'anomaly.plugin.contact::error.send_message')
             );
         }
 
