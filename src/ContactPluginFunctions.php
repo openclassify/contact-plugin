@@ -10,7 +10,6 @@ use Illuminate\Container\Container;
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\ContactPlugin
  */
 class ContactPluginFunctions
 {
@@ -44,7 +43,7 @@ class ContactPluginFunctions
     /**
      * Return a stream entry form.
      *
-     * @param array $parameters
+     * @param  array $parameters
      * @return $this
      */
     public function form(array $parameters = [])

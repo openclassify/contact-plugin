@@ -2,7 +2,6 @@
 
 use Anomaly\Streams\Platform\Support\Parser;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Robbo\Presenter\Decorator;
 
 /**
@@ -11,9 +10,8 @@ use Robbo\Presenter\Decorator;
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\ContactPlugin\Form\Command
  */
-class GetMessageData implements SelfHandling
+class GetMessageData
 {
 
     /**
@@ -36,8 +34,8 @@ class GetMessageData implements SelfHandling
     /**
      * Handle the command.
      *
-     * @param Decorator $decorator
-     * @param Parser    $parser
+     * @param  Decorator $decorator
+     * @param  Parser    $parser
      * @return array
      */
     public function handle(Decorator $decorator, Parser $parser)

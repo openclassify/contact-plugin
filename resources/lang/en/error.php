@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'send_message' => 'There was a problem sending your message.'
+    'send_message' => 'There was a problem sending your message.',
 ];

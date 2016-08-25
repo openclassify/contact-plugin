@@ -8,7 +8,6 @@ use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\ContactPlugin\Form
  */
 class ContactFormBuilder extends FormBuilder
 {
@@ -29,12 +28,12 @@ class ContactFormBuilder extends FormBuilder
         'name'    => [
             'label'    => 'Name',
             'type'     => 'anomaly.field_type.text',
-            'required' => true
+            'required' => true,
         ],
         'email'   => [
             'label'    => 'Email',
             'type'     => 'anomaly.field_type.email',
-            'required' => true
+            'required' => true,
         ],
         'subject' => [
             'label'    => 'Subject',
@@ -45,15 +44,15 @@ class ContactFormBuilder extends FormBuilder
                     'Support',
                     'Sales',
                     'Feedback',
-                    'Other'
-                ]
-            ]
+                    'Other',
+                ],
+            ],
         ],
         'message' => [
             'label'    => 'Message',
             'type'     => 'anomaly.field_type.textarea',
-            'required' => true
-        ]
+            'required' => true,
+        ],
     ];
 
     /**
@@ -63,8 +62,8 @@ class ContactFormBuilder extends FormBuilder
      */
     protected $actions = [
         'submit' => [
-            'redirect' => false
-        ]
+            'redirect' => false,
+        ],
     ];
 
     /**
@@ -80,7 +79,7 @@ class ContactFormBuilder extends FormBuilder
      * @var array
      */
     protected $options = [
-        'breadcrumb' => false
+        'breadcrumb' => false,
     ];
 
 }

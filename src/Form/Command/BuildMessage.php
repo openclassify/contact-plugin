@@ -3,7 +3,6 @@
 use Anomaly\SettingsModule\Setting\SettingRepository;
 use Anomaly\Streams\Platform\Support\Parser;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Mail\Message;
 
 /**
@@ -12,9 +11,8 @@ use Illuminate\Mail\Message;
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\ContactPlugin\Form\Command
  */
-class BuildMessage implements SelfHandling
+class BuildMessage
 {
 
     /**
@@ -34,7 +32,7 @@ class BuildMessage implements SelfHandling
     /**
      * Create a new BuildMessage instance.
      *
-     * @param Message $message
+     * @param Message     $message
      * @param FormBuilder $builder
      */
     public function __construct(Message $message, FormBuilder $builder)

@@ -1,7 +1,7 @@
 <?php namespace Anomaly\ContactPlugin\Form\Command;
 
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
-use Illuminate\Contracts\Bus\SelfHandling;
+
 
 /**
  * Class GetMessageView
@@ -9,9 +9,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\ContactPlugin\Form\Command
  */
-class GetMessageView implements SelfHandling
+class GetMessageView
 {
 
     /**

@@ -4,7 +4,6 @@ use Anomaly\ContactPlugin\Form\Command\BuildMessage;
 use Anomaly\ContactPlugin\Form\Command\GetMessageData;
 use Anomaly\ContactPlugin\Form\Command\GetMessageView;
 use Anomaly\Streams\Platform\Message\MessageBag;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Mail\Mailer;
 use Illuminate\Mail\Message;
@@ -15,9 +14,8 @@ use Illuminate\Mail\Message;
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\ContactPlugin\Form
  */
-class ContactFormHandler implements SelfHandling
+class ContactFormHandler
 {
 
     use DispatchesJobs;
