@@ -45,14 +45,18 @@ class ContactFormHandler implements SelfHandling
             $this->dispatch(new BuildMessage($message, $builder));
         };
 
-        // Send the message and report.
-        if ($mailer->send($view, $data, $message)) {
-            $messages->success(
-                $builder->getFormOption('success_message', 'anomaly.plugin.contact::success.send_message')
-            );
-        } else {
+        // Send the email.
+        $mailer->send($view, $data, $message);
+
+        // If there are any failures, report.
+        if(count($mailer->failures()) > 0) {
             $messages->error(
                 $builder->getFormOption('error_message', 'anomaly.plugin.contact::error.send_message')
+            );
+        } else {
+            // Otherwise, show success.
+            $messages->success(
+                $builder->getFormOption('success_message', 'anomaly.plugin.contact::success.send_message')
             );
         }
 
