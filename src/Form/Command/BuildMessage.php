@@ -48,32 +48,49 @@ class BuildMessage
      */
     public function handle(SettingRepository $settings, Parser $parser)
     {
+        $input = $this->builder->getFormValues()->all();
+
         call_user_func_array(
             [$this->message, 'to'],
-            (array)$this->builder->getOption(
-                'to',
-                $settings->get('streams::contact_email', env('CONTACT_EMAIL', env('ADMIN_EMAIL')))
+            $parser->parse(
+                (array)$this->builder->getOption(
+                    'to',
+                    $settings->get('streams::contact_email', env('CONTACT_EMAIL', env('ADMIN_EMAIL')))
+                ),
+                $input
             )
         );
 
         if ($cc = (array)$this->builder->getOption('cc', null)) {
-            call_user_func_array([$this->message, 'cc'], $cc);
+            call_user_func_array(
+                [$this->message, 'cc'],
+                $parser->parse($cc, $input)
+            );
         }
 
         if ($bcc = (array)$this->builder->getOption('bcc', null)) {
-            call_user_func_array([$this->message, 'bcc'], $bcc);
+            call_user_func_array(
+                [$this->message, 'bcc'],
+                $parser->parse($bcc, $input)
+            );
         }
 
         call_user_func_array(
             [$this->message, 'from'],
-            (array)$this->builder->getOption('from', $settings->get('streams::server_email', 'noreply@localhost.com'))
+            $parser->parse(
+                (array)$this->builder->getOption(
+                    'from',
+                    $settings->get('streams::server_email', 'noreply@localhost.com')
+                ),
+                $input
+            )
         );
 
         call_user_func_array(
             [$this->message, 'subject'],
             (array)$parser->parse(
                 $this->builder->getOption('subject', 'Contact Request'),
-                $this->builder->getFormValues()->all()
+                $input
             )
         );
     }
