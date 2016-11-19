@@ -1,7 +1,8 @@
 <h3>{{ subject }}</h3>
 
 {% for field in fields %}
-    <strong>{{ field.label }}:</strong> {{ field.value }}
+    {# Mind you these are presenters #}
+    <strong>{{ field.getLabel() }}:</strong> {{ field.value|raw }}
     <br>
 {% endfor %}
 <br>

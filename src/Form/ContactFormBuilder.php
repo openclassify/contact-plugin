@@ -67,13 +67,6 @@ class ContactFormBuilder extends FormBuilder
     ];
 
     /**
-     * The form buttons.
-     *
-     * @var array
-     */
-    protected $buttons = [];
-
-    /**
      * The form options.
      *
      * @var array
