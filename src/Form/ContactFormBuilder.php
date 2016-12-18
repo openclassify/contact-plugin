@@ -61,9 +61,7 @@ class ContactFormBuilder extends FormBuilder
      * @var array
      */
     protected $actions = [
-        'submit' => [
-            'redirect' => false,
-        ],
+        'submit',
     ];
 
     /**
