@@ -2,7 +2,6 @@
 
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 
-
 /**
  * Class GetMessageView
  *
@@ -37,6 +36,9 @@ class GetMessageView
      */
     public function handle()
     {
-        return $this->builder->getFormOption('message_view', 'anomaly.plugin.contact::email/contact');
+        return $this->builder->getFormOption(
+            'message_view',
+            'anomaly.plugin.contact::email/contact'
+        );
     }
 }
