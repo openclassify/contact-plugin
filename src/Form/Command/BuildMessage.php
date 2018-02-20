@@ -1,6 +1,6 @@
 <?php namespace Anomaly\ContactPlugin\Form\Command;
 
-use Anomaly\SettingsModule\Setting\SettingRepository;
+use Anomaly\SettingsModule\Setting\Contract\SettingRepositoryInterface;
 use Anomaly\Streams\Platform\Support\Parser;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 use Illuminate\Mail\Message;
@@ -44,9 +44,10 @@ class BuildMessage
     /**
      * Handle the command.
      *
-     * @param SettingRepository $settings
+     * @param  SettingRepositoryInterface  $settings
+     * @param  Parser                      $parser
      */
-    public function handle(SettingRepository $settings, Parser $parser)
+    public function handle(SettingRepositoryInterface $settings, Parser $parser)
     {
         $input = $this->builder->getFormValues()->all();
 
@@ -55,7 +56,10 @@ class BuildMessage
             $parser->parse(
                 (array)$this->builder->getOption(
                     'to',
-                    $settings->get('streams::contact_email', env('CONTACT_EMAIL', env('ADMIN_EMAIL')))
+                    $settings->get(
+                        'streams::contact_email',
+                        env('CONTACT_EMAIL', env('ADMIN_EMAIL'))
+                    )
                 ),
                 $input
             )
@@ -80,7 +84,10 @@ class BuildMessage
             $parser->parse(
                 (array)$this->builder->getOption(
                     'from',
-                    $settings->get('streams::server_email', 'noreply@localhost.com')
+                    $settings->get(
+                        'streams::server_email',
+                        'noreply@localhost.com'
+                    )
                 ),
                 $input
             )
