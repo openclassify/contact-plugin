@@ -40,16 +40,13 @@ class GetMessageData
      */
     public function handle(Decorator $decorator, Parser $parser)
     {
-        $data = [];
-
-        $data['form']   = $this->builder->getFormPresenter();
-        $data['fields'] = $decorator->decorate($this->builder->getFormFields());
-
-        $data['subject'] = $parser->parse(
-            $this->builder->getOption('subject', 'Contact Request'),
-            $this->builder->getFormValues()->all()
-        );
-
-        return $data;
+        return [
+            'form' => $this->builder->getFormPresenter(),
+            'fields' => $decorator->decorate($this->builder->getFormFields()),
+            'subject' => $parser->parse(
+                $this->builder->getOption('subject', 'Contact Request'),
+                $this->builder->getFormValues()->all()
+            ),
+        ];
     }
 }
