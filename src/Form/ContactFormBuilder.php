@@ -72,5 +72,4 @@ class ContactFormBuilder extends FormBuilder
     protected $options = [
         'breadcrumb' => false,
     ];
-
 }
