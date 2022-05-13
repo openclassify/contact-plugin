@@ -1,4 +1,4 @@
-<?php namespace Anomaly\ContactPlugin\Form\Command;
+<?php namespace Visiosoft\ContactPlugin\Form\Command;
 
 use Anomaly\Streams\Platform\Support\Parser;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;

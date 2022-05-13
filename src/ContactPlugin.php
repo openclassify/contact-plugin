@@ -1,4 +1,4 @@
-<?php namespace Anomaly\ContactPlugin;
+<?php namespace Visiosoft\ContactPlugin;
 
 use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
 
