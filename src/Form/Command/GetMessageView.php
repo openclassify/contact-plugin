@@ -1,4 +1,4 @@
-<?php namespace Anomaly\ContactPlugin\Form\Command;
+<?php namespace Visiosoft\ContactPlugin\Form\Command;
 
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 
@@ -38,7 +38,7 @@ class GetMessageView
     {
         return $this->builder->getFormOption(
             'message_view',
-            'anomaly.plugin.contact::email/contact'
+            'visiosoft.plugin.contact::email/contact'
         );
     }
 }

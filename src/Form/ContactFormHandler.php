@@ -1,8 +1,8 @@
-<?php namespace Anomaly\ContactPlugin\Form;
+<?php namespace Visiosoft\ContactPlugin\Form;
 
-use Anomaly\ContactPlugin\Form\Command\BuildMessage;
-use Anomaly\ContactPlugin\Form\Command\GetMessageData;
-use Anomaly\ContactPlugin\Form\Command\GetMessageView;
+use Visiosoft\ContactPlugin\Form\Command\BuildMessage;
+use Visiosoft\ContactPlugin\Form\Command\GetMessageData;
+use Visiosoft\ContactPlugin\Form\Command\GetMessageView;
 use Anomaly\Streams\Platform\Message\MessageBag;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Mail\Mailer;
@@ -49,12 +49,12 @@ class ContactFormHandler
         // If there are any failures, report.
         if(count($mailer->failures()) > 0) {
             $messages->error(
-                $builder->getFormOption('error_message', 'anomaly.plugin.contact::error.send_message')
+                $builder->getFormOption('error_message', 'visiosoft.plugin.contact::error.send_message')
             );
         } else {
             // Otherwise, show success.
             $messages->success(
-                $builder->getFormOption('success_message', 'anomaly.plugin.contact::success.send_message')
+                $builder->getFormOption('success_message', 'visiosoft.plugin.contact::success.send_message')
             );
         }
 

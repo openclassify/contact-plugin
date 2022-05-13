@@ -1,6 +1,6 @@
-<?php namespace Anomaly\ContactPlugin;
+<?php namespace Visiosoft\ContactPlugin;
 
-use Anomaly\ContactPlugin\Form\ContactFormBuilder;
+use Visiosoft\ContactPlugin\Form\ContactFormBuilder;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
 
 /**

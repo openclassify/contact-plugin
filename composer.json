@@ -1,5 +1,5 @@
 {
-    "name": "anomaly/contact-plugin",
+    "name": "visiosof/contact-plugin",
     "type": "streams-addon",
     "description": "A simple contact form plugin.",
     "keywords": [
@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Anomaly\\ContactPlugin\\": "src/"
+            "Visiosoft\\ContactPlugin\\": "src/"
         }
     },
     "extra": {
